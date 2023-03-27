@@ -17,9 +17,14 @@ export const tasksReducder = (state = initState, action) => {
             state.tasks[doneTask].status = true;
             return { tasks: state.tasks }
 
-            case TASKS_CONSTANTS.DELETE_TASK:
-                const filterdTasks = state.tasks.filter((task) => task.id != action.payload);
-                return {tasks : filterdTasks}
+        case TASKS_CONSTANTS.DELETE_TASK:
+            const filterdTasks = state.tasks.filter((task) => task.id != action.payload);
+            return { tasks: filterdTasks }
+
+        case TASKS_CONSTANTS.CHANGE_NAME:
+            const editTask = state.tasks.findIndex(obj => obj.id == action.payload.id);
+            state.tasks[editTask].taskName = action.payload.newName;
+            return {tasks: state.tasks}
         default:
             return state
     }

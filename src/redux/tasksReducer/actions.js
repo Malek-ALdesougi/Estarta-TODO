@@ -22,5 +22,12 @@ export const deleteTask = (id) => (dispatch) => {
         type: TASKS_CONSTANTS.DELETE_TASK,
         payload: id
     })
-
 }
+
+export const changeTaskName = (id, newName) => (dispatch) => {
+    dispatch({
+        type: TASKS_CONSTANTS.CHANGE_NAME,
+        payload: {id, newName}
+    })
+}
+
