@@ -1,9 +1,14 @@
 import React, { useRef } from 'react';
 import { MDBInput, MDBBtn } from 'mdb-react-ui-kit';
+//actions
 import { addNewTask } from '../../redux/tasksReducer/actions';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+
+//react-redux
+import { useDispatch, useSelector } from 'react-redux';
+//component
 import SingleTask from '../singleTask/SingleTask';
+
+//react toastify
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

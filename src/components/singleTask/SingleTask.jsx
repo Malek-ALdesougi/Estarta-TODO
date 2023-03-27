@@ -1,9 +1,7 @@
 //react-redux
 import { useDispatch } from 'react-redux';
-
 // action
 import { deleteTask, doneTask, changeTaskName } from '../../redux/tasksReducer/actions';
-
 //mdb boostrab 
 import React, { useState, useRef } from 'react';
 import {
@@ -18,7 +16,9 @@ import {
   MDBInput
 } from 'mdb-react-ui-kit';
 
-
+//react toastify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function SingleTask({ task }) {
@@ -28,12 +28,25 @@ function SingleTask({ task }) {
   const dispatch = useDispatch();
   const editName = useRef('');
 
+
+  const notify = () => toast.error('Task Deleted Successfully', {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
+
   function handelDoneTask(task){
       dispatch(doneTask(task))
   }
   
   function handelDeleteTask(id){
     dispatch(deleteTask(id))
+    notify();
   }
   
   function handleEditTaskName(event){
@@ -75,14 +88,25 @@ function SingleTask({ task }) {
             </MDBModalBody>
 
             <MDBModalFooter>
-              <MDBBtn color='secondary' onClick={toggleShow}>
+              <MDBBtn  className='bg-danger text-light' color='secondary' onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn onClick={() => handelSaveChanges(task.id)}>Save changes</MDBBtn>
+              <MDBBtn className='bg-success' onClick={() => handelSaveChanges(task.id)}>Save changes</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
+
+      <ToastContainer position="top-right"
+       autoClose={5000}
+       hideProgressBar={false}
+       newestOnTop={false}
+       closeOnClick
+       rtl={false}
+       pauseOnFocusLoss
+       draggable
+       pauseOnHover
+       theme="dark" />
     </div>
   )
 }
